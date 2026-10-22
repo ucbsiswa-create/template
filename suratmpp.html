@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Surat Rasmi MPP — Pembina Surat</title>
+<style>
+:root{font-family:Arial,Helvetica,sans-serif;color:#171717}
+*{box-sizing:border-box}
+body{margin:0;background:#eef0f3}
+.app{display:grid;grid-template-columns:350px minmax(0,1fr);gap:20px;max-width:1500px;margin:auto;padding:20px}
+.panel{background:white;padding:20px;border-radius:12px;align-self:start;position:sticky;top:12px;max-height:calc(100vh - 24px);overflow:auto;box-shadow:0 2px 12px #0000000c}
+h1{font-size:20px;margin:0 0 6px}
+.hint{font-size:12px;color:#666;line-height:1.5;margin:0 0 18px}
+label{display:block;font-size:12px;font-weight:700;margin:13px 0 5px}
+input,textarea{width:100%;font:13px Arial,sans-serif;padding:9px;border:1px solid #cfd3da;border-radius:6px;background:#fff}
+textarea{min-height:72px;resize:vertical;line-height:1.4}
+input:focus,textarea:focus{outline:2px solid #a7c8ff;border-color:#578ce5}
+button{border:0;border-radius:7px;padding:11px 14px;font-weight:700;cursor:pointer}
+.primary{background:#1f2937;color:white;width:100%;margin-top:16px}
+.secondary{background:#e8edf4;color:#1f2937;width:100%;margin-top:8px}
+.section{border-top:1px solid #e5e7eb;margin-top:18px;padding-top:5px}
+.workspace{min-width:0;overflow:auto}
+.page{width:210mm;height:297mm;background:white;margin:0 auto 20px;box-shadow:0 3px 18px #00000018;position:relative;overflow:hidden;padding:10mm 11.5mm 12mm}
+.letterhead{height:34mm;position:relative;border-bottom:1px solid #8a9a96;display:flex;align-items:center;justify-content:center}
+.logo{position:absolute;object-fit:contain}
+.logo.left{left:0;top:1mm;width:31mm;height:28mm}
+.logo.right{right:0;top:0mm;width:34mm;height:31mm}
+.headtext{text-align:center;font-family:"Times New Roman",serif;font-weight:bold;font-size:10pt;line-height:1.15;max-width:112mm;padding:0 1mm}
+.headtext .org{font-size:12pt}
+.header-meta{display:flex;justify-content:flex-end;gap:4mm;font-size:8.5pt;margin-top:0mm;height:11mm;;}
+.header-meta .ref{width:70mm}
+.columns{display:grid;grid-template-columns:45mm minmax(0,1fr);min-height:195mm}
+.sidebar{border-right:1px solid #222;padding:8mm 4mm 0 2.5mm;font-size:8.2pt;line-height:1.23}
+.side-group{margin-bottom:12mm}
+.side-title{margin-bottom:3mm}
+.side-name{font-weight:400}
+.side-phone{margin-top:1mm}
+.letter-body{padding:0mm 0 0 2.8mm;font-size:10.2pt;line-height:1.25;text-align:justify}
+.addressee{font-weight:bold;font-style:italic;margin-bottom:5mm;padding-right: 45mm;}
+.salutation{margin-bottom:5mm}
+.subject{font-weight:bold;margin:0 0 8mm;text-transform:uppercase}
+.intro{margin-bottom:7mm}
+.paragraph{display:grid;grid-template-columns:8mm 1fr;gap:1mm;margin-bottom:4mm}
+.paragraph .num{text-align:left}
+.bank{font-weight:bold;margin:5mm 0 6mm 12mm;line-height:1.25}
+.page2{padding-top:13mm}
+.continuation{margin-left:45mm;padding-left:2.8mm;font-size:10.2pt;line-height:1.25;text-align:justify}
+.continuation .paragraph{margin-bottom:5mm}
+.motto{font-weight:bold;text-align:left;margin:24mm 0 12mm -37mm}
+.closing{margin:0 0 4mm -37mm}
+.signature-space{height:20mm;margin-left:-37mm}
+.sign-name{font-weight:bold;margin-left:-37mm;margin-bottom:3mm}
+.sign-detail{margin-left:-37mm;margin-bottom:3mm}
+.page-footer{position:absolute;bottom:7mm;left:0;right:0;text-align:center;font-size:7pt;color:#777}
+@page{size:A4;margin:0}
+@media print{
+ body{background:white}
+ .app{display:block;padding:0;margin:0;max-width:none}
+ .panel{display:none}
+ .workspace{overflow:visible}
+ .page{margin:0;box-shadow:none;page-break-after:always;break-after:page}
+ .page:last-child{page-break-after:auto;break-after:auto}
+}
+@media(max-width:900px){
+ .app{display:block;padding:10px}
+ .panel{position:static;max-height:none;margin-bottom:16px}
+ .workspace{overflow:auto}
+ .page{transform-origin:top left}
+}
+</style>
+</head>
+<body>
+<div class="app">
+<aside class="panel">
+  <h1>Surat Rasmi MPP</h1>
+  <p class="hint">Isi ruangan di bawah. Kepala surat, logo dan senarai jawatan pelajar dikekalkan. Tekan <b>Cetak / Simpan PDF</b> apabila siap.</p>
+  <label for="ref">Rujukan Kami</label><input id="ref" value="HEPA 300/8.8.1.12 jld 3(71)">
+  <label for="date">Tarikh</label><input id="date" value="6 Ogos 2026">
+  <label for="recipient">Penerima / Addressee</label><textarea id="recipient">KEPADA SESIAPA YANG BERKENAAN</textarea>
+  <label for="salutation">Sapaan</label><input id="salutation" value="Tuan/puan,">
+  <label for="subject">Perkara / Tajuk surat</label><textarea id="subject">MEMOHON SUMBANGAN BAGI PROGRAM SAMBUTAN HARI KEBANGSAAN KALI KE-69 PERINGKAT UNIVERSITY COLLEGE BESTARI</textarea>
+  <label for="intro">Ayat pembuka</label><textarea id="intro">Dengan hormatnya perkara di atas dirujuk.</textarea>
+  <div class="section">
+    <label for="p2">Perenggan 2</label><textarea id="p2">Sukacitanya dimaklumkan bahawa, sempena hari kemerdekaan yang bakal tiba tidak lama lagi, satu program telah dirangka kepada pelajar UC Bestari iaitu Program Semarak Merdeka Peringkat University College Bestari 2026 dengan membawa tema kemerdekaan “Malaysia Madani : Kesejahteraan Dinikmati”.</textarea>
+    <label for="p3">Perenggan 3</label><textarea id="p3">Pelaksanaan program ini bertujuan untuk meningkatkan penghayatan terhadap sejarah perjuangan kemerdekaan negara, memupuk semangat cintakan tanah air serta mengeratkan hubungan antara pelajar dan kakitangan. Pelbagai aktiviti telah dirancang bagi memastikan program ini dapat dilaksanakan dengan penglibatan aktif warga UCB serta memberikan pengalaman yang bermakna kepada para pelajar.</textarea>
+    <label for="p4">Perenggan 4</label><textarea id="p4">Sehubungan dengan itu, dengan penuh hormat pihak kami ingin memohon sumbangan daripada pihak tuan/puan bagi membantu menjayakan pelaksanaan program tersebut. Sumbangan boleh diberikan dalam bentuk wang tunai, barangan, makanan, hadiah, hamper atau apa-apa bentuk sumbangan yang bersesuaian dengan keperluan program. Sumbangan wang tunai boleh disalurkan ke akaun berikut:</textarea>
+    <label for="bank">Maklumat akaun bank (pilihan)</label><textarea id="bank">Nombor Akaun: 80-0670144-1
+Nama Bank: CIMB BANK BERHAD
+Nama Akaun: Majlis Perwakilan Pelajar (MPP)</textarea>
+    <label for="p5">Perenggan 5</label><textarea id="p5">Sumbangan dan sokongan daripada pihak tuan/puan amat bermakna kepada pihak kami dalam memastikan program ini dapat dilaksanakan dengan lancar serta mencapai objektif yang telah ditetapkan. Pada masa yang sama, sokongan tersebut turut mencerminkan komitmen pihak tuan/puan dalam menyokong pembangunan generasi muda, pendidikan dan aktiviti kemasyarakatan.</textarea>
+  </div>
+  <div class="section">
+    <label for="p6">Perenggan 6 (halaman 2)</label><textarea id="p6">Pihak UCB amat menghargai segala bentuk sumbangan yang diberikan dan akan memastikan penghargaan sewajarnya diberikan kepada pihak penyumbang sebagai tanda terima kasih atas keprihatinan dan sokongan yang diberikan.</textarea>
+    <label for="p7">Perenggan 7 (halaman 2)</label><textarea id="p7">Kerjasama dan pertimbangan baik daripada pihak tuan/puan terhadap permohonan ini amatlah kami hargai. Semoga sumbangan dan sokongan yang diberikan dapat memberi manfaat kepada para pelajar serta menyumbang kepada kejayaan program Semarak Kemerdekaan Peringkat University College Bestari 2026.</textarea>
+    <label for="motto">Cogan kata</label><input id="motto" value="“ILMU DAN KEPIMPINAN SEIRING MELANGKAH”">
+    <label for="closing">Penutup</label><input id="closing" value="Sekian, terima kasih.">
+    <label for="signatory">Nama penandatangan</label><input id="signatory" value="(MUHAMMAD ALIFF FAKRUL BIN MAT RAWI)">
+    <label for="signrole">Jawatan</label><input id="signrole" value="Presiden,">
+    <label for="signorg">Organisasi</label><input id="signorg" value="Majlis Perwakilan Pelajar Sesi 2026/2027,">
+    <label for="signinst">Institusi</label><input id="signinst" value="University College Bestari.">
+    <label for="signphone">No. telefon</label><input id="signphone" value="No tel: 010-4234377">
+  </div>
+  <button class="primary" onclick="window.print()">Cetak / Simpan PDF</button>
+  <button class="secondary" onclick="resetTemplate()">Pulihkan teks asal templat</button>
+</aside>
+<main class="workspace">
+  <section class="page" id="page1">
+    <header class="letterhead">
+      <img class="logo left" src="https://pbs.twimg.com/media/HVMIlUBaYAAYqlo?format=png&name=small" alt="Logo Bestari">
+      <div class="headtext">
+        <div class="org">MAJLIS PERWAKILAN PELAJAR SESI 2026/2027</div>
+        d/a Bahagian Hal Ehwal Pelajar Dan Alumni<br>
+        University College Bestari,<br>
+        Putera Jaya, Bandar Permaisuri,<br>
+        22100 Setiu, Terengganu.<br>
+        No. Tel: 09-6097101/102 &nbsp; Email:mppucb1617@gmail.com
+      </div>
+       <img class="logo right" src="https://pbs.twimg.com/media/HVMIPCTbIAAfKcy?format=png&name=small" alt="Logo Bestari">
+    </header>
+   
+    <div class="columns">
+      <aside class="sidebar">
+        <div class="side-group"><div class="side-title">PRESIDEN:</div><div class="side-name">MUHAMMAD ALIFF<br>FAKRUL BIN MAT RAWI</div><div class="side-phone">010-4234377</div></div>
+        <div class="side-group"><div class="side-title">TIMBALAN PRESIDEN I:</div><div class="side-name">NUR BALQIS FAT IHAH<br>BINTI ABDUL MU'IZZ</div><div class="side-phone">016-8519794</div></div>
+        <div class="side-group"><div class="side-title">TIMBALAN PRESIDEN II:</div><div class="side-name">TAN GHAZALI PUTRA BIN<br>MOHD HALIM</div><div class="side-phone">019-4772663</div></div>
+        <div class="side-group"><div class="side-title">SETIAUSAHA:</div><div class="side-name">SITI NUR HAJAR BINTI<br>ABD RAHIM</div><div class="side-phone">011-39210588</div></div>
+        <div class="side-group"><div class="side-title">PENOLONG SETIAUSAHA:</div><div class="side-name">AINUN MAISARAH BINTI<br>ABDULLAH</div><div class="side-phone">011-73961696</div></div>
+        <div class="side-group"><div class="side-title">BENDAHARI:</div><div class="side-name">WAN SITI NORSYAFIKA<br>BINTI WAN MOHD SUKRI</div><div class="side-phone">011-29285759</div></div>
+      </aside>
+      <article class="letter-body">
+         <div class="header-meta"><div class="ref">Rujukan Kami: <span data-field="ref">HEPA 300/8.8.1.12 jld 3(71)</span><br>Tarikh&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <span data-field="date">6 Ogos 2026</span></div></div>
+        <div class="addressee" data-field="recipient">KEPADA SESIAPA YANG BERKENAAN</div>
+        <div class="salutation" data-field="salutation">Tuan/puan,</div>
+        <div class="subject" data-field="subject">MEMOHON SUMBANGAN BAGI PROGRAM SAMBUTAN HARI KEBANGSAAN KALI KE-69 PERINGKAT UNIVERSITY COLLEGE BESTARI</div>
+        <div class="intro" data-field="intro">Dengan hormatnya perkara di atas dirujuk.</div>
+        <div class="paragraph"><div>2.</div><div data-field="p2"></div></div>
+        <div class="paragraph"><div>3.</div><div data-field="p3"></div></div>
+        <div class="paragraph"><div>4.</div><div><span data-field="p4"></span><div class="bank" data-field="bank"></div></div></div>
+        <div class="paragraph"><div>5.</div><div data-field="p5"></div></div>
+      </article>
+    </div>
+  </section>
+  <section class="page page2" id="page2">
+    <article class="continuation">
+      <div class="paragraph"><div>6.</div><div data-field="p6"></div></div>
+      <div class="paragraph"><div>7.</div><div data-field="p7"></div></div>
+      <div class="motto" data-field="motto"></div>
+      <div class="closing" data-field="closing"></div>
+      <div class="closing">Yang Benar,</div>
+      <div class="signature-space"></div>
+      <div class="sign-name" data-field="signatory"></div>
+      <div class="sign-detail" data-field="signrole"></div>
+      <div class="sign-detail" data-field="signorg"></div>
+      <div class="sign-detail" data-field="signinst"></div>
+      <div class="sign-detail" data-field="signphone"></div>
+    </article>
+  </section>
+</main>
+</div>
+<script>
+const initial = {};
+const fields = [
+  'ref', 'date', 'recipient', 'salutation', 'subject',
+  'intro', 'p2', 'p3', 'p4', 'bank', 'p5', 'p6',
+  'p7', 'motto', 'closing', 'signatory', 'signrole',
+  'signorg', 'signinst', 'signphone'
+];
+
+function update() {
+  fields.forEach(id => {
+    const input = document.getElementById(id);
+
+    document.querySelectorAll(`[data-field="${id}"]`).forEach(target => {
+      // Convert new lines into HTML line breaks
+      target.innerHTML = input.value
+        .split('\n')
+        .map(line => {
+          const div = document.createElement('div');
+          div.textContent = line;
+          return div.innerHTML;
+        })
+        .join('<br />');
+
+      if (id === 'bank') {
+        target.style.display = input.value.trim() ? 'block' : 'none';
+      }
+    });
+  });
+}
+
+fields.forEach(id => {
+  document.getElementById(id).addEventListener('input', update);
+});
+
+function resetTemplate() {
+  fields.forEach(id => {
+    document.getElementById(id).value = initial[id] || '';
+  });
+
+  update();
+}
+
+update();
+</script>
+</body>
+</html>
