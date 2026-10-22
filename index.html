@@ -1,0 +1,1001 @@
+<!DOCTYPE html>
+<html lang="ms" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portal Template UC Bestari - UCB Template Hub</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="icon" href="https://pbs.twimg.com/media/HVMIPCTbIAAfKcy?format=png&name=small" type="image/x-icon">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#eff6ff',
+                            100: '#dbeafe',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                            800: '#1e40af',
+                            900: '#1e3a8a',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+        
+        /* Modal Transitions */
+        .modal-backdrop {
+            transition: opacity 0.3s ease-in-out;
+        }
+        .modal-content {
+            transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans antialiased min-h-screen flex flex-col justify-between">
+
+    <!-- ================= NAVBAR ================= -->
+    <header class="sticky top-0 z-40 bg-white/90 backdrop-blur-md border-b border-slate-200 shadow-sm transition-all duration-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo -->
+              <div class="flex items-center space-x-3">
+    <img
+        src="https://pbs.twimg.com/media/HVMIPCTbIAAfKcy?format=png&name=small"
+        alt="UniTemplate Logo"
+        class="w-11 h-11 object-contain"
+    />
+
+    <div>
+        <span class="text-xl font-extrabold bg-gradient-to-r from-blue-700 via-indigo-700 to-indigo-900 bg-clip-text text-transparent block leading-none">
+            MPP UC Bestari
+        </span>
+        <span class="text-xs font-medium text-slate-500 tracking-wider">
+            PORTAL Templates & RUJUKAN
+        </span>
+    </div>
+</div>
+
+                <!-- Desktop Navigation Links -->
+                <nav class="hidden md:flex items-center space-x-8">
+                    <a href="#utama" class="text-sm font-semibold text-blue-600 hover:text-blue-700 transition">Utama</a>
+                    <a href="#cari-template" class="text-sm font-medium text-slate-600 hover:text-blue-600 transition">Cari Templat</a>
+                    <a href="#sumbang-template" class="text-sm font-medium text-slate-600 hover:text-blue-600 transition">Sumbang Templat</a>
+                    <a href="#faq" class="text-sm font-medium text-slate-600 hover:text-blue-600 transition">Panduan & FAQ</a>
+                </nav>
+
+                <!-- Right Action Buttons -->
+                <div class="hidden md:flex items-center space-x-4">
+                    <button onclick="openPublishModal()" class="inline-flex items-center space-x-2 px-4 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold text-sm transition">
+                        <i class="fa-solid fa-cloud-arrow-up text-blue-600"></i>
+                        <span>Muat Naik</span>
+                    </button>
+                    <button onclick="showToast('Modul Log Masuk Pelajar sedia dihubungkan ke Portal Universiti (SSO)')" class="inline-flex items-center space-x-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-semibold text-sm shadow-md shadow-blue-500/20 transition transform hover:-translate-y-0.5">
+                        <i class="fa-solid fa-user-lock"></i>
+                        <span>Log Masuk</span>
+                    </button>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-button" class="text-slate-600 hover:text-blue-600 p-2 focus:outline-none">
+                        <i class="fa-solid fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Container -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-b border-slate-200 px-4 pt-2 pb-6 space-y-3 shadow-lg">
+            <a href="#utama" class="block py-2 text-base font-semibold text-blue-600 border-b border-slate-100">Utama</a>
+            <a href="#cari-template" class="block py-2 text-base font-medium text-slate-600 hover:text-blue-600 border-b border-slate-100">Cari Templat</a>
+            <a href="#sumbang-template" class="block py-2 text-base font-medium text-slate-600 hover:text-blue-600 border-b border-slate-100">Sumbang Templat</a>
+            <a href="#faq" class="block py-2 text-base font-medium text-slate-600 hover:text-blue-600 border-b border-slate-100">Panduan & FAQ</a>
+            <div class="pt-2 flex flex-col space-y-2">
+                <button onclick="openPublishModal()" class="w-full py-2.5 rounded-xl bg-slate-100 text-slate-700 font-semibold text-sm flex items-center justify-center space-x-2">
+                    <i class="fa-solid fa-cloud-arrow-up text-blue-600"></i>
+                    <span>Sumbang Templat</span>
+                </button>
+                <button onclick="showToast('Modul Log Masuk SSO Pelajar')" class="w-full py-2.5 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-semibold text-sm flex items-center justify-center space-x-2">
+                    <i class="fa-solid fa-user-lock"></i>
+                    <span>Log Masuk SSO</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- ================= HERO SECTION ================= -->
+    <section id="utama" class="relative bg-gradient-to-b from-blue-50/70 via-indigo-50/30 to-slate-50 pt-12 pb-20 overflow-hidden">
+        <!-- Background Decorative Elements -->
+        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-96 pointer-events-none opacity-40">
+            <div class="absolute -top-10 -left-10 w-72 h-72 bg-blue-400 rounded-full blur-3xl"></div>
+            <div class="absolute top-20 right-0 w-80 h-80 bg-indigo-400 rounded-full blur-3xl"></div>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center max-w-3xl mx-auto">
+                <span class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-100/80 text-blue-800 text-xs font-semibold tracking-wide border border-blue-200 mb-6 shadow-sm">
+                    <span class="w-2 h-2 rounded-full bg-blue-600 animate-pulse"></span>
+                    Hab Dokumen & Format Rasmi Pelajar Universiti
+                </span>
+                
+                <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-slate-900 tracking-tight leading-tight mb-6">
+                    Semua Format & Template Universiti <span class="bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">Di Satu Tempat</span>
+                </h1>
+                
+                <p class="text-lg text-slate-600 leading-relaxed mb-8">
+                    Jimat masa penyediaan dokumen anda. Dapatkan format surat rasmi, slaid pembentangan, tesis, resume, dan borang universiti yang disahkan dan sedia diguna.
+                </p>
+
+                <!-- Hero Quick Search Bar -->
+                <div class="max-w-2xl mx-auto bg-white p-2 sm:p-3 rounded-2xl shadow-xl shadow-slate-200/60 border border-slate-200 flex flex-col sm:flex-row items-center gap-2 mb-12">
+                    <div class="relative w-full flex items-center">
+                        <i class="fa-solid fa-magnifying-glass absolute left-4 text-slate-400"></i>
+                        <input type="text" id="hero-search-input" placeholder="Cari contoh 'Surat Penangguhan', 'Slaid Final Year', 'Resume'..." 
+                            class="w-full pl-11 pr-4 py-3 text-slate-800 bg-transparent focus:outline-none text-sm placeholder-slate-400">
+                    </div>
+                    <button onclick="executeHeroSearch()" class="w-full sm:w-auto px-6 py-3 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-semibold text-sm rounded-xl transition shadow-md shadow-blue-500/20 whitespace-nowrap">
+                        Cari Templat
+                    </button>
+                </div>
+
+                <!-- Quick Stats Badge Bar -->
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 pt-6 border-t border-slate-200/80">
+                    <div class="p-3 bg-white/60 backdrop-blur-sm rounded-xl border border-slate-200/60 shadow-sm">
+                        <p class="text-2xl sm:text-3xl font-extrabold text-blue-600" id="stat-templates">580+</p>
+                        <p class="text-xs font-medium text-slate-500">Templat Disediakan</p>
+                    </div>
+                    <div class="p-3 bg-white/60 backdrop-blur-sm rounded-xl border border-slate-200/60 shadow-sm">
+                        <p class="text-2xl sm:text-3xl font-extrabold text-indigo-600" id="stat-downloads">24,500+</p>
+                        <p class="text-xs font-medium text-slate-500">Jumlah Muat Turun</p>
+                    </div>
+                    <div class="p-3 bg-white/60 backdrop-blur-sm rounded-xl border border-slate-200/60 shadow-sm">
+                        <p class="text-2xl sm:text-3xl font-extrabold text-blue-600">100%</p>
+                        <p class="text-xs font-medium text-slate-500">Mengikut Format Rasmi</p>
+                    </div>
+                    <div class="p-3 bg-white/60 backdrop-blur-sm rounded-xl border border-slate-200/60 shadow-sm">
+                        <p class="text-2xl sm:text-3xl font-extrabold text-indigo-600">4.9 / 5.0</p>
+                        <p class="text-xs font-medium text-slate-500">Penilaian Pelajar</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= MAIN TEMPLATE EXPLORER SECTION ================= -->
+    <section id="cari-template" class="py-16 bg-slate-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <!-- Section Header -->
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-10 pb-6 border-b border-slate-200 gap-4">
+                <div>
+                    <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">Koleksi</h2>
+                    <p class="text-slate-600 text-sm mt-1">Pilih, semak maklumat, dan muat turun templat mengikut keperluan akademik anda.</p>
+                </div>
+
+                <!-- Live Search input within explorer -->
+                <div class="relative w-full md:w-80">
+                    <i class="fa-solid fa-search absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-sm"></i>
+                    <input type="text" id="explorer-search" oninput="filterTemplates()" placeholder="Tapis kata kunci..." class="w-full pl-10 pr-4 py-2 bg-white border border-slate-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-sm">
+                </div>
+            </div>
+
+            <!-- Filter Buttons Bar (Categories) -->
+            <div class="flex items-center space-x-2 overflow-x-auto pb-4 mb-8 no-scrollbar" id="category-filters">
+                <button onclick="setCategory('semua')" class="cat-btn active px-4 py-2 rounded-xl text-sm font-semibold whitespace-nowrap bg-blue-600 text-white shadow-sm transition">
+                    Semua Templat
+                </button>
+                <button onclick="setCategory('surat')" class="cat-btn px-4 py-2 rounded-xl text-sm font-semibold whitespace-nowrap bg-white text-slate-600 hover:bg-slate-100 border border-slate-200 transition">
+                    <i class="fa-solid fa-envelope-open-text mr-1.5 text-blue-500"></i>Surat Rasmi
+                </button>
+                <button onclick="setCategory('laporan')" class="cat-btn px-4 py-2 rounded-xl text-sm font-semibold whitespace-nowrap bg-white text-slate-600 hover:bg-slate-100 border border-slate-200 transition">
+                    <i class="fa-solid fa-book-bookmark mr-1.5 text-emerald-500"></i>Laporan & Tesis
+                </button>
+                <button onclick="setCategory('slaid')" class="cat-btn px-4 py-2 rounded-xl text-sm font-semibold whitespace-nowrap bg-white text-slate-600 hover:bg-slate-100 border border-slate-200 transition">
+                    <i class="fa-solid fa-file-powerpoint mr-1.5 text-orange-500"></i>Slaid Pembentangan
+                </button>
+                <button onclick="setCategory('resume')" class="cat-btn px-4 py-2 rounded-xl text-sm font-semibold whitespace-nowrap bg-white text-slate-600 hover:bg-slate-100 border border-slate-200 transition">
+                    <i class="fa-solid fa-id-card mr-1.5 text-indigo-500"></i>Resume & Portfolio
+                </button>
+                <button onclick="setCategory('borang')" class="cat-btn px-4 py-2 rounded-xl text-sm font-semibold whitespace-nowrap bg-white text-slate-600 hover:bg-slate-100 border border-slate-200 transition">
+                    <i class="fa-solid fa-clipboard-check mr-1.5 text-purple-500"></i>Borang Permohonan
+                </button>
+            </div>
+
+            <!-- Templates Grid Container -->
+            <div id="templates-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Template Cards dynamically populated by JS -->
+            </div>
+
+            <!-- Empty State Notice (Hidden by default) -->
+            <div id="no-results" class="hidden text-center py-16 bg-white rounded-2xl border border-dashed border-slate-300">
+                <i class="fa-solid fa-folder-open text-4xl text-slate-300 mb-3 block"></i>
+                <h3 class="text-lg font-bold text-slate-700">Tiada Templat Dijumpai</h3>
+                <p class="text-sm text-slate-500 mt-1">Cuba cari kata kunci lain atau pilih kategori berbeza.</p>
+                <button onclick="resetFilters()" class="mt-4 px-4 py-2 bg-blue-50 text-blue-600 font-semibold text-xs rounded-lg hover:bg-blue-100 transition">
+                    Tetap Semula Penapis
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= CONTRIBUTE / PUBLISH TEMPLATE SECTION ================= -->
+    <section id="sumbang-template" class="py-16 bg-gradient-to-br from-slate-900 via-indigo-950 to-blue-950 text-white relative overflow-hidden">
+        <!-- Glow accents -->
+        <div class="absolute -bottom-20 -right-20 w-96 h-96 bg-blue-600/20 rounded-full blur-3xl pointer-events-none"></div>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                
+                <!-- Left Info Text -->
+                <div class="lg:col-span-5 space-y-6">
+                    <span class="px-3 py-1 bg-blue-500/20 border border-blue-400/30 text-blue-300 rounded-full text-xs font-semibold tracking-wider uppercase inline-block">
+                        Bantu Komuniti Pelajar
+                    </span>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-white leading-tight">
+                        Ada Templat Kemas & Berguna? Kongsikan Bersama!
+                    </h2>
+                    <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
+                        Pernah buat format laporan makmal, resume mantap, atau slaid pembentangan yang dipuji pensyarah? Muat naik karya anda untuk memudahkan ribuan rakan kampus lain!
+                    </p>
+                    
+                    <ul class="space-y-3 pt-2 text-sm text-slate-200">
+                        <li class="flex items-center gap-3">
+                            <span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-xs"><i class="fa-solid fa-check"></i></span>
+                            Sumbangan anda akan disemak dan diiktiraf
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-xs"><i class="fa-solid fa-check"></i></span>
+                            Dapatkan badge 'Top Contributor' dalam profil
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-xs"><i class="fa-solid fa-check"></i></span>
+                            Format disokong: Word, PDF, PowerPoint, Canva Link
+                        </li>
+                    </ul>
+
+                    <div class="pt-4">
+                        <button onclick="openPublishModal()" class="px-6 py-3.5 bg-gradient-to-r from-blue-500 to-indigo-500 hover:from-blue-600 hover:to-indigo-600 text-white font-bold text-sm rounded-xl shadow-lg shadow-blue-500/30 transition flex items-center gap-2">
+                            <i class="fa-solid fa-plus-circle text-base"></i>
+                            <span>Sumbang Templat Sekarang</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Right Inline Quick Form Card -->
+                <div class="lg:col-span-7 bg-white/10 backdrop-blur-md border border-white/10 rounded-2xl p-6 sm:p-8 shadow-2xl">
+                    <h3 class="text-xl font-bold text-white mb-2 flex items-center gap-2">
+                        <i class="fa-solid fa-file-export text-blue-400"></i> Borang Sumbangan Pantas
+                    </h3>
+                    <p class="text-slate-300 text-xs mb-6">Isi maklumat asas templat di bawah untuk memulakan proses muat naik.</p>
+
+                    <form id="quick-publish-form" onsubmit="handleQuickPublish(event)" class="space-y-4">
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-200 mb-1">Tajuk Templat <span class="text-red-400">*</span></label>
+                            <input type="text" required id="quick-title" placeholder="Contoh: Format Surat Permohonan Cuti Kuliah" class="w-full px-4 py-2.5 rounded-xl bg-slate-800/80 border border-slate-700 text-white placeholder-slate-400 text-sm focus:outline-none focus:border-blue-400">
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-200 mb-1">Kategori <span class="text-red-400">*</span></label>
+                                <select required id="quick-category" class="w-full px-4 py-2.5 rounded-xl bg-slate-800 border border-slate-700 text-white text-sm focus:outline-none focus:border-blue-400">
+                                    <option value="" disabled selected>Pilih Kategori</option>
+                                    <option value="surat">Surat Rasmi</option>
+                                    <option value="laporan">Laporan & Tesis</option>
+                                    <option value="slaid">Slaid Pembentangan</option>
+                                    <option value="resume">Resume & Portfolio</option>
+                                    <option value="borang">Borang Permohonan</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-200 mb-1">Format Fail <span class="text-red-400">*</span></label>
+                                <select required id="quick-format" class="w-full px-4 py-2.5 rounded-xl bg-slate-800 border border-slate-700 text-white text-sm focus:outline-none focus:border-blue-400">
+                                    <option value="Word">Microsoft Word (.docx)</option>
+                                    <option value="PDF">Dokumen PDF (.pdf)</option>
+                                    <option value="PowerPoint">PowerPoint (.pptx)</option>
+                                    <option value="Canva">Pautan Canva (Canva Link)</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-200 mb-1">Penerangan Ringkas <span class="text-red-400">*</span></label>
+                            <textarea required id="quick-desc" rows="2" placeholder="Terangkan kegunaan templat ini..." class="w-full px-4 py-2.5 rounded-xl bg-slate-800/80 border border-slate-700 text-white placeholder-slate-400 text-sm focus:outline-none focus:border-blue-400"></textarea>
+                        </div>
+
+                        <div class="pt-2">
+                            <button type="submit" class="w-full py-3 bg-blue-600 hover:bg-blue-500 text-white font-semibold text-sm rounded-xl transition shadow-md flex items-center justify-center space-x-2">
+                                <i class="fa-solid fa-paper-plane"></i>
+                                <span>Hantar Untuk Semakan</span>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= FAQ & GUIDE SECTION ================= -->
+    <section id="faq" class="py-16 bg-white">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-extrabold text-slate-900">Soalan Lazim & Panduan (FAQ)</h2>
+                <p class="text-slate-500 text-sm mt-2">Maklumat ringkas mengenai penggunaan templat rasmi universiti.</p>
+            </div>
+
+            <div class="space-y-4">
+                <div class="border border-slate-200 rounded-xl p-4 hover:border-blue-300 transition">
+                    <h3 class="font-bold text-slate-800 text-base flex items-center gap-2">
+                        <i class="fa-solid fa-circle-question text-blue-600"></i>
+                        Adakah templat di portal ini rasmi & diluluskan?
+                    </h3>
+                    <p class="text-slate-600 text-sm mt-2 pl-6">
+                        Ya. Semua templat berkategori 'Surat Rasmi' dan 'Borang Permohonan' direka mengikut standard piawaian pentadbiran universiti dan dikemas kini secara berkesinambungan.
+                    </p>
+                </div>
+
+                <div class="border border-slate-200 rounded-xl p-4 hover:border-blue-300 transition">
+                    <h3 class="font-bold text-slate-800 text-base flex items-center gap-2">
+                        <i class="fa-solid fa-circle-question text-blue-600"></i>
+                        Bagaimanakah cara menggunakan templat Canva?
+                    </h3>
+                    <p class="text-slate-600 text-sm mt-2 pl-6">
+                        Apabila anda menekan butang muat turun pada templat Canva, anda akan dihalakan ke pautan rasmi Canva. Pilih "Use Template for New Design" untuk menyunting terus ke akaun Canva anda.
+                    </p>
+                </div>
+
+                <div class="border border-slate-200 rounded-xl p-4 hover:border-blue-300 transition">
+                    <h3 class="font-bold text-slate-800 text-base flex items-center gap-2">
+                        <i class="fa-solid fa-circle-question text-blue-600"></i>
+                        Berapa lamakah masa semakan bagi templat yang disumbang?
+                    </h3>
+                    <p class="text-slate-600 text-sm mt-2 pl-6">
+                        Pasukan moderator pelajar & pentadbiran akan menyemak format dokumen dalam tempoh 1 hingga 2 hari bekerja sebelum ia disiarkan secara awam.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= FOOTER ================= -->
+    <footer class="bg-slate-900 text-slate-400 py-12 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+                <div class="col-span-1 md:col-span-2">
+                    
+  <div class="flex items-center space-x-3">
+    <img
+        src="https://pbs.twimg.com/media/HVMIPCTbIAAfKcy?format=png&name=small"
+        alt="UniTemplate Logo"
+        class="w-11 h-11 object-contain bg-white rounded"
+    />
+
+    <div>
+        <span class="text-xl font-extrabold bg-gradient-to-r from-blue-700 via-indigo-700 to-indigo-900 bg-clip-text text-transparent block leading-none">
+            MPP UC Bestari
+        </span>
+        <span class="text-xs font-medium text-slate-500 tracking-wider">
+            PORTAL Templates & RUJUKAN
+        </span>
+    </div>
+</div>
+
+                    
+                    <p class="text-sm text-slate-400 max-w-sm mb-4">
+                        Inisiatif digital untuk mempermudah urusan surat-menyurat, serahan tugasan, dan penyediaan dokumen rasmi pelajar universiti.
+                    </p>
+                </div>
+
+                <div>
+                    <h4 class="text-sm font-semibold text-white tracking-wider uppercase mb-4">Kategori Popular</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#cari-template" onclick="setCategory('surat')" class="hover:text-white transition">Surat Rasmi Rayuan</a></li>
+                        <li><a href="#cari-template" onclick="setCategory('laporan')" class="hover:text-white transition">Format Tesis Latihan Industri</a></li>
+                        <li><a href="#cari-template" onclick="setCategory('slaid')" class="hover:text-white transition">Slaid Final Year Project</a></li>
+                        <li><a href="#cari-template" onclick="setCategory('resume')" class="hover:text-white transition">Resume Internship ATS</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-sm font-semibold text-white tracking-wider uppercase mb-4">Pautan Penting</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#utama" class="hover:text-white transition">Portal Pelajar Utama</a></li>
+                        <li><a href="#sumbang-template" class="hover:text-white transition">Garis Panduan Sumbangan</a></li>
+                        <li><a href="#faq" class="hover:text-white transition">Pusat Bantuan</a></li>
+                        <li><a href="#" onclick="showToast('Dasar Privasi Hak Cipta Universiti')" class="hover:text-white transition">Dasar Privasi</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="pt-8 border-t border-slate-800 text-xs text-center sm:flex sm:justify-between sm:text-left">
+                <p>&copy; 2026 Portal Templat Universiti. Hak Cipta Terelihara.</p>
+                <p class="mt-2 sm:mt-0">Direkabentuk khas untuk kemudahan pelajar & staf universiti.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ================= PREVIEW MODAL ================= -->
+    <div id="preview-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 sm:p-6">
+        <!-- Backdrop -->
+        <div onclick="closePreviewModal()" class="absolute inset-0 bg-slate-900/60 backdrop-blur-sm transition-opacity"></div>
+        
+        <!-- Modal Content Container -->
+        <div class="relative bg-white rounded-2xl shadow-2xl w-full max-w-3xl overflow-hidden z-10 flex flex-col max-h-[90vh]">
+            <!-- Modal Header -->
+            <div class="px-6 py-4 border-b border-slate-200 flex items-center justify-between bg-slate-50">
+                <div class="flex items-center space-x-3">
+                    <span id="modal-category-badge" class="px-2.5 py-1 bg-blue-100 text-blue-700 font-bold text-xs rounded-md">SURAT</span>
+                    <h3 id="modal-title" class="text-lg font-bold text-slate-800 truncate max-w-md">Tajuk Templat</h3>
+                </div>
+                <button onclick="closePreviewModal()" class="text-slate-400 hover:text-slate-600 p-1.5 rounded-lg hover:bg-slate-200 transition">
+                    <i class="fa-solid fa-xmark text-xl"></i>
+                </button>
+            </div>
+
+            <!-- Modal Body (Content Preview) -->
+            <div class="p-6 overflow-y-auto space-y-6">
+                <!-- Preview Document Box Visual Mockup -->
+                <div class="bg-slate-100 border border-slate-200 rounded-xl p-6 sm:p-8 relative">
+                    <div class="absolute top-3 right-3 bg-white px-2 py-1 rounded text-xs font-semibold text-slate-500 shadow-sm border border-slate-200 flex items-center gap-1">
+                        <i class="fa-regular fa-file-lines"></i>
+                        <span id="modal-format-type">DOCX</span>
+                    </div>
+
+                    <!-- Simulated Paper Layout -->
+                    <div class="bg-white p-6 sm:p-8 rounded shadow-sm border border-slate-200 text-slate-700 text-xs sm:text-sm font-mono space-y-4">
+                        <div class="border-b pb-3 flex justify-between items-start">
+                            <div>
+                                <p class="font-bold text-slate-800">[NAMA PELAJAR / PEMOHON]</p>
+                                <p class="text-slate-500 text-xs">NO. MATRIK: 2026XXXXXX</p>
+                                <p class="text-slate-500 text-xs">FAKULTI SAINS KOMPUTER & TEKNOLOGI MAKLUMAT</p>
+                            </div>
+                            <div class="text-right text-xs text-slate-400">
+                                <p>TARIKH: DD/MM/YYYY</p>
+                            </div>
+                        </div>
+
+                        <div class="py-2">
+                            <p class="font-bold text-slate-900 text-sm underline mb-2" id="modal-preview-header">PERMOHONAN RASMI KEBENARAN TUGASAN</p>
+                            <p class="leading-relaxed text-slate-600" id="modal-preview-text">
+                                Merujuk kepada perkara di atas, saya ingin memohon kelulusan rasmi berkenaan perkara ini mengikut syarat dan garis panduan universiti...
+                            </p>
+                        </div>
+
+                        <div class="bg-blue-50/50 p-3 rounded border border-blue-100 text-xs text-blue-800 font-sans">
+                            <p class="font-semibold mb-1"><i class="fa-solid fa-circle-info mr-1"></i> Kandungan Templat Termasuk:</p>
+                            <ul class="list-disc list-inside space-y-0.5" id="modal-features-list">
+                                <li>Format perenggan & saiz font standard universiti</li>
+                                <li>Ruang tandatangan Penyelia / Dekan</li>
+                                <li>Nota kaki rasmi universiti</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Template Details -->
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 bg-slate-50 p-4 rounded-xl text-center border border-slate-200">
+                    <div>
+                        <span class="text-xs text-slate-400 block">Penilaian</span>
+                        <span class="text-sm font-bold text-amber-500" id="modal-rating"><i class="fa-solid fa-star"></i> 4.9</span>
+                    </div>
+                    <div>
+                        <span class="text-xs text-slate-400 block">Muat Turun</span>
+                        <span class="text-sm font-bold text-slate-700" id="modal-downloads">1,200</span>
+                    </div>
+                    <div>
+                        <span class="text-xs text-slate-400 block">Pemilik Sumbangan</span>
+                        <span class="text-sm font-bold text-slate-700 truncate block" id="modal-author">Hal Ehwal Pelajar</span>
+                    </div>
+                    <div>
+                        <span class="text-xs text-slate-400 block">Saiz Fail</span>
+                        <span class="text-sm font-bold text-slate-700" id="modal-size">142 KB</span>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 class="text-xs font-bold uppercase text-slate-400 tracking-wider mb-2">Penerangan Penuh</h4>
+                    <p id="modal-description" class="text-sm text-slate-600 leading-relaxed">
+                        Deskripsi penuh templat...
+                    </p>
+                </div>
+            </div>
+
+            <!-- Modal Footer -->
+            <div class="px-6 py-4 bg-slate-50 border-t border-slate-200 flex flex-col sm:flex-row items-center justify-between gap-3">
+                <span class="text-xs text-slate-500">Percuma untuk semua pelajar universiti</span>
+                <div class="flex items-center space-x-3 w-full sm:w-auto">
+                    <button onclick="closePreviewModal()" class="w-1/2 sm:w-auto px-4 py-2.5 border border-slate-300 hover:bg-slate-100 text-slate-700 rounded-xl text-sm font-semibold transition">
+                        Tutup
+                    </button>
+                    <button onclick="downloadCurrentTemplate()" class="w-1/2 sm:w-auto px-6 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-sm font-semibold transition shadow-md shadow-blue-500/20 flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-download"></i>
+                        <span>Muat Turun Sekarang</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ================= PUBLISH / SUMBANG MODAL ================= -->
+    <div id="publish-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 sm:p-6">
+        <div onclick="closePublishModal()" class="absolute inset-0 bg-slate-900/60 backdrop-blur-sm transition-opacity"></div>
+        
+        <div class="relative bg-white rounded-2xl shadow-2xl w-full max-w-2xl overflow-hidden z-10 flex flex-col max-h-[90vh]">
+            <div class="px-6 py-4 border-b border-slate-200 flex items-center justify-between bg-slate-50">
+                <h3 class="text-lg font-bold text-slate-800 flex items-center gap-2">
+                    <i class="fa-solid fa-cloud-arrow-up text-blue-600"></i> Muat Naik / Sumbang Templat
+                </h3>
+                <button onclick="closePublishModal()" class="text-slate-400 hover:text-slate-600 p-1.5 rounded-lg hover:bg-slate-200 transition">
+                    <i class="fa-solid fa-xmark text-xl"></i>
+                </button>
+            </div>
+
+            <form onsubmit="handleFullPublish(event)" class="p-6 overflow-y-auto space-y-4">
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1">Tajuk Dokumen / Templat <span class="text-red-500">*</span></label>
+                    <input type="text" id="pub-title" required placeholder="Contoh: Format Proposal Tesis Sastera 2026" class="w-full px-4 py-2.5 border border-slate-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 mb-1">Kategori <span class="text-red-500">*</span></label>
+                        <select id="pub-category" required class="w-full px-4 py-2.5 border border-slate-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            <option value="surat">Surat Rasmi</option>
+                            <option value="laporan">Laporan & Tesis</option>
+                            <option value="slaid">Slaid Pembentangan</option>
+                            <option value="resume">Resume & Portfolio</option>
+                            <option value="borang">Borang Permohonan</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 mb-1">Jenis Format / Alat <span class="text-red-500">*</span></label>
+                        <select id="pub-format" required class="w-full px-4 py-2.5 border border-slate-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            <option value="Word">Microsoft Word (.docx)</option>
+                            <option value="PDF">Dokumen PDF (.pdf)</option>
+                            <option value="PowerPoint">PowerPoint (.pptx)</option>
+                            <option value="Canva">Pautan Canva (Link)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1">Penerangan Ringkas <span class="text-red-500">*</span></label>
+                    <textarea id="pub-desc" required rows="3" placeholder="Jelaskan isi kandungan templat, kelebihan dan siapa yang sesuai menggunakannya..." class="w-full px-4 py-2.5 border border-slate-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1">Muat Naik Fail / Pautan Preview</label>
+                    <div class="border-2 border-dashed border-slate-300 rounded-xl p-6 text-center hover:bg-slate-50 transition cursor-pointer" onclick="document.getElementById('file-upload-input').click()">
+                        <i class="fa-solid fa-file-arrow-up text-3xl text-blue-500 mb-2"></i>
+                        <p class="text-sm font-semibold text-slate-700" id="upload-label-text">Klik untuk pilih fail atau seret ke sini</p>
+                        <p class="text-xs text-slate-400 mt-1">Sokongan: DOCX, PDF, PPTX (Max 15MB)</p>
+                        <input type="file" id="file-upload-input" class="hidden" onchange="updateFileName(this)">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1">Nama Penyumbang / Fakulti</label>
+                    <input type="text" id="pub-author" placeholder="Contoh: Ahmad Zaki (Fakulti Pendidikan)" class="w-full px-4 py-2.5 border border-slate-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+
+                <div class="pt-4 border-t border-slate-200 flex justify-end space-x-3">
+                    <button type="button" onclick="closePublishModal()" class="px-5 py-2.5 border border-slate-300 hover:bg-slate-100 text-slate-700 rounded-xl text-sm font-semibold transition">
+                        Batal
+                    </button>
+                    <button type="submit" class="px-6 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-sm font-semibold transition shadow-md shadow-blue-500/20">
+                        Hantar Templat
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- ================= TOAST NOTIFICATION ================= -->
+    <div id="toast" class="fixed bottom-5 right-5 z-50 transform translate-y-20 opacity-0 transition-all duration-300 bg-slate-900 text-white px-5 py-3.5 rounded-xl shadow-2xl flex items-center space-x-3 max-w-md">
+        <i class="fa-solid fa-circle-check text-emerald-400 text-lg" id="toast-icon"></i>
+        <span class="text-sm font-medium" id="toast-message">Mesej Notifikasi</span>
+    </div>
+
+    <!-- ================= JAVASCRIPT LOGIC ================= -->
+    <script>
+        // Sample Template Data Store
+        let templatesData = [
+            {
+                id: 1,
+                title: "Surat Rayuan Penangguhan Pengajian",
+                category: "surat",
+                format: "Word",
+                rating: 4.9,
+                downloads: 3420,
+                author: "Hal Ehwal Pelajar",
+                size: "45 KB",
+                description: "Templat surat rasmi bagi permohonan penangguhan semester atas sebab kesihatan, peribadi atau kewangan.",
+                previewHeader: "PERMOHONAN PENANGGUHAN PENGAJIAN SEMESTER",
+                previewText: "Saya seperti nama di atas ingin memohon penangguhan pengajian bagi semester ini atas sebab-sebab yang tidak dapat elakkan..."
+            },
+            {
+                id: 2,
+                title: "Format Tesis & Laporan Latihan Industri (Internship)",
+                category: "laporan",
+                format: "Word",
+                rating: 5.0,
+                downloads: 8900,
+                author: "Unit Latihan Industri",
+                size: "1.2 MB",
+                description: "Format lengkap susun atur laporan akhir latihan industri merangkumi Muka Hadapan, Penghargaan, Bab 1 hingga Bab 5.",
+                previewHeader: "LAPORAN AKHIR LATIHAN INDUSTRI (SEMESTER 2)",
+                previewText: "Laporan ini dikemukakan bagi memenuhi syarat penganugerahan Ijazah Sarjana Muda. Mengandungi jadual, carta & ringkasan tugasan harian..."
+            },
+            {
+                id: 3,
+                title: "Slaid Pembentangan Projek Akhir (FYP Presentation)",
+                category: "slaid",
+                format: "PowerPoint",
+                rating: 4.8,
+                downloads: 5120,
+                author: "Kelab Kelab STEM Universiti",
+                size: "4.5 MB",
+                description: "Reka bentuk slaid moden dan bersih khas untuk pembentangan Projek Tahun Akhir (FYP) beserta carta dinamik.",
+                previewHeader: "FINAL YEAR PROJECT PROPOSAL DEFENSE",
+                previewText: "Slide 1: Problem Statement & Objectives. Slide 2: Methodology & Framework. Slide 3: Expected Results & Timeline..."
+            },
+            {
+                id: 4,
+                title: "Resume & CV Permohonan Latihan Industri (ATS Friendly)",
+                category: "resume",
+                format: "Canva",
+                rating: 4.9,
+                downloads: 6200,
+                author: "Pusat Kerjaya Pelajar",
+                size: "Pautan Canva",
+                description: "Templat resume padat 1 muka surat yang melepasi sistem tapisan ATS syarikat korporat dan multinasional.",
+                previewHeader: "CURRICULUM VITAE - [NAMA PELAJAR]",
+                previewText: "Ringkasan Profil: Pelajar Ijazah Kejuruteraan Perisian tahun akhir yang mempunyai kepakaran dalam pembangunan aplikasi web dan sistem..."
+            },
+            {
+                id: 5,
+                title: "Borang Permohonan Peruntukan Aktiviti Kelab / Persatuan",
+                category: "borang",
+                format: "PDF",
+                rating: 4.7,
+                downloads: 1850,
+                author: "Majlis Perwakilan Pelajar",
+                size: "210 KB",
+                description: "Borang khas permohonan dana kelab pelajar untuk penganjuran program, bengkel, dan aktiviti kebudayaan.",
+                previewHeader: "BORANG PERMOHONAN DANA AKTIVITI PELAJAR",
+                previewText: "Sila lengkapkan butiran program, anggaran belanjawan, serta senarai jawatankuasa sebelum diserahkan ke Pejabat HEP..."
+            },
+            {
+                id: 6,
+                title: "Surat Kehadiran Program / Kebenaran Pelepasan Kuliah",
+                category: "surat",
+                format: "Word",
+                rating: 4.6,
+                downloads: 2400,
+                author: "Hal Ehwal Pelajar",
+                size: "38 KB",
+                description: "Surat pengesahan pelepasan kuliah rasmi bagi pelajar yang mewakili universiti dalam sukan atau pertandingan.",
+                previewHeader: "PERMOHONAN PELEPASAN KULIAH BAGI WAKIL UNIVERSITI",
+                previewText: "Dengan ini disahkan bahawa pelajar di bawah telah dilantik mewakili universiti dalam kejohanan diperingkat kebangsaan..."
+            }
+        ];
+
+        let currentCategory = 'semua';
+        let activeTemplateId = null;
+
+        // Init on DOM Content Loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            renderTemplates();
+            setupMobileMenu();
+        });
+
+        // Toggle Mobile Navigation Menu
+        function setupMobileMenu() {
+            const btn = document.getElementById('mobile-menu-button');
+            const menu = document.getElementById('mobile-menu');
+            btn.addEventListener('click', () => {
+                menu.classList.toggle('hidden');
+            });
+        }
+
+        // Render Templates Grid based on Category & Search Filter
+        function renderTemplates() {
+            const grid = document.getElementById('templates-grid');
+            const noResults = document.getElementById('no-results');
+            const explorerSearch = document.getElementById('explorer-search').value.toLowerCase().trim();
+
+            grid.innerHTML = '';
+
+            const filtered = templatesData.filter(item => {
+                const matchCategory = (currentCategory === 'semua') || (item.category === currentCategory);
+                const matchSearch = item.title.toLowerCase().includes(explorerSearch) || 
+                                    item.description.toLowerCase().includes(explorerSearch) ||
+                                    item.format.toLowerCase().includes(explorerSearch);
+                return matchCategory && matchSearch;
+            });
+
+            if (filtered.length === 0) {
+                noResults.classList.remove('hidden');
+            } else {
+                noResults.classList.add('hidden');
+                filtered.forEach(item => {
+                    grid.appendChild(createTemplateCard(item));
+                });
+            }
+        }
+
+        // Helper to Create HTML Template Card
+        function createTemplateCard(item) {
+            const card = document.createElement('div');
+            card.className = "bg-white rounded-2xl border border-slate-200/80 shadow-sm hover:shadow-xl hover:-translate-y-1 transition duration-200 flex flex-col justify-between overflow-hidden group";
+
+            // Format Badge Colors
+            let formatBadgeClass = "bg-blue-50 text-blue-700 border-blue-200";
+            if (item.format === 'PowerPoint') formatBadgeClass = "bg-orange-50 text-orange-700 border-orange-200";
+            if (item.format === 'Canva') formatBadgeClass = "bg-teal-50 text-teal-700 border-teal-200";
+            if (item.format === 'PDF') formatBadgeClass = "bg-red-50 text-red-700 border-red-200";
+
+            card.innerHTML = `
+                <div class="p-6">
+                    <!-- Top Category & Format Tag -->
+                    <div class="flex items-center justify-between mb-3">
+                        <span class="text-xs font-bold uppercase tracking-wider text-slate-400">
+                            ${getCategoryLabel(item.category)}
+                        </span>
+                        <span class="px-2.5 py-1 text-xs font-bold rounded-lg border ${formatBadgeClass}">
+                            ${item.format}
+                        </span>
+                    </div>
+
+                    <!-- Title -->
+                    <h3 class="text-lg font-bold text-slate-800 group-hover:text-blue-600 transition leading-snug mb-2">
+                        ${item.title}
+                    </h3>
+
+                    <!-- Description -->
+                    <p class="text-xs text-slate-500 line-clamp-2 leading-relaxed mb-4">
+                        ${item.description}
+                    </p>
+
+                    <!-- Stats Row -->
+                    <div class="flex items-center space-x-4 text-xs text-slate-500 pt-3 border-t border-slate-100">
+                        <div class="flex items-center gap-1 text-amber-500 font-semibold">
+                            <i class="fa-solid fa-star"></i>
+                            <span>${item.rating}</span>
+                        </div>
+                        <div class="flex items-center gap-1">
+                            <i class="fa-solid fa-download text-slate-400"></i>
+                            <span>${item.downloads.toLocaleString()} muat turun</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="px-6 py-3.5 bg-slate-50 border-t border-slate-100 flex items-center justify-between gap-2">
+                    <button onclick="openPreviewModal(${item.id})" class="text-xs font-semibold text-slate-600 hover:text-blue-600 flex items-center gap-1.5 py-1 px-2 rounded-lg hover:bg-slate-200/60 transition">
+                        <i class="fa-solid fa-eye"></i>
+                        <span>Pratonton</span>
+                    </button>
+                    <button onclick="downloadTemplate(${item.id})" class="text-xs font-bold bg-blue-600 hover:bg-blue-700 text-white px-3.5 py-2 rounded-xl transition shadow-sm flex items-center gap-1.5">
+                        <i class="fa-solid fa-download"></i>
+                        <span>Muat Turun</span>
+                    </button>
+                </div>
+            `;
+            return card;
+        }
+
+        // Return Readable Label for Categories
+        function getCategoryLabel(cat) {
+            switch (cat) {
+                case 'surat': return 'Surat Rasmi';
+                case 'laporan': return 'Laporan & Tesis';
+                case 'slaid': return 'Slaid Pembentangan';
+                case 'resume': return 'Resume & CV';
+                case 'borang': return 'Borang Permohonan';
+                default: return 'Dokumen';
+            }
+        }
+
+        // Change Active Category
+        function setCategory(cat) {
+            currentCategory = cat;
+            
+            // Update UI Button active states
+            const buttons = document.querySelectorAll('#category-filters button');
+            buttons.forEach(btn => {
+                btn.className = "cat-btn px-4 py-2 rounded-xl text-sm font-semibold whitespace-nowrap bg-white text-slate-600 hover:bg-slate-100 border border-slate-200 transition";
+            });
+
+            event.currentTarget.className = "cat-btn active px-4 py-2 rounded-xl text-sm font-semibold whitespace-nowrap bg-blue-600 text-white shadow-sm transition";
+
+            renderTemplates();
+        }
+
+        // Filter templates dynamically on search
+        function filterTemplates() {
+            renderTemplates();
+        }
+
+        // Hero Search trigger
+        function executeHeroSearch() {
+            const query = document.getElementById('hero-search-input').value;
+            document.getElementById('explorer-search').value = query;
+            renderTemplates();
+            document.getElementById('cari-template').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Reset Filter
+        function resetFilters() {
+            document.getElementById('explorer-search').value = '';
+            currentCategory = 'semua';
+            renderTemplates();
+        }
+
+        // ================= PREVIEW MODAL LOGIC =================
+        function openPreviewModal(id) {
+            const template = templatesData.find(t => t.id === id);
+            if (!template) return;
+
+            activeTemplateId = id;
+            document.getElementById('modal-title').textContent = template.title;
+            document.getElementById('modal-category-badge').textContent = getCategoryLabel(template.category).toUpperCase();
+            document.getElementById('modal-format-type').textContent = template.format;
+            document.getElementById('modal-rating').innerHTML = `<i class="fa-solid fa-star"></i> ${template.rating}`;
+            document.getElementById('modal-downloads').textContent = template.downloads.toLocaleString();
+            document.getElementById('modal-author').textContent = template.author;
+            document.getElementById('modal-size').textContent = template.size;
+            document.getElementById('modal-description').textContent = template.description;
+            document.getElementById('modal-preview-header').textContent = template.previewHeader || template.title;
+            document.getElementById('modal-preview-text').textContent = template.previewText || template.description;
+
+            document.getElementById('preview-modal').classList.remove('hidden');
+        }
+
+        function closePreviewModal() {
+            document.getElementById('preview-modal').classList.add('hidden');
+        }
+
+        function downloadCurrentTemplate() {
+            if (activeTemplateId) {
+                downloadTemplate(activeTemplateId);
+                closePreviewModal();
+            }
+        }
+
+        // Simulated Download Action
+        function downloadTemplate(id) {
+            const template = templatesData.find(t => t.id === id);
+            if (template) {
+                template.downloads += 1;
+                renderTemplates(); // Update download count UI
+                showToast(`Memuat turun: "${template.title}" (${template.format})`);
+            }
+        }
+
+        // ================= PUBLISH / SUMBANG MODAL LOGIC =================
+        function openPublishModal() {
+            document.getElementById('publish-modal').classList.remove('hidden');
+        }
+
+        function closePublishModal() {
+            document.getElementById('publish-modal').classList.add('hidden');
+        }
+
+        function updateFileName(input) {
+            if (input.files && input.files[0]) {
+                document.getElementById('upload-label-text').textContent = "Fail Dipilih: " + input.files[0].name;
+            }
+        }
+
+        // Handle full publish submission
+        function handleFullPublish(e) {
+            e.preventDefault();
+            const title = document.getElementById('pub-title').value;
+            const category = document.getElementById('pub-category').value;
+            const format = document.getElementById('pub-format').value;
+            const desc = document.getElementById('pub-desc').value;
+            const author = document.getElementById('pub-author').value || "Pelajar Universiti";
+
+            // Add new template into runtime store
+            const newDoc = {
+                id: Date.now(),
+                title: title,
+                category: category,
+                format: format,
+                rating: 5.0,
+                downloads: 1,
+                author: author,
+                size: "350 KB",
+                description: desc,
+                previewHeader: title.toUpperCase(),
+                previewText: desc
+            };
+
+            templatesData.unshift(newDoc);
+            renderTemplates();
+            closePublishModal();
+            showToast("Terima kasih! Templat anda telah berjaya dimuat naik & disiarkan.");
+            
+            // Reset form
+            e.target.reset();
+            document.getElementById('upload-label-text').textContent = "Klik untuk pilih fail atau seret ke sini";
+        }
+
+        // Handle Quick Publish Form in Section
+        function handleQuickPublish(e) {
+            e.preventDefault();
+            const title = document.getElementById('quick-title').value;
+            const category = document.getElementById('quick-category').value;
+            const format = document.getElementById('quick-format').value;
+            const desc = document.getElementById('quick-desc').value;
+
+            const newDoc = {
+                id: Date.now(),
+                title: title,
+                category: category,
+                format: format,
+                rating: 5.0,
+                downloads: 1,
+                author: "Sumbangan Pelajar",
+                size: "200 KB",
+                description: desc,
+                previewHeader: title.toUpperCase(),
+                previewText: desc
+            };
+
+            templatesData.unshift(newDoc);
+            renderTemplates();
+            showToast("Sumbangan pantas berjaya diterima!");
+            e.target.reset();
+            
+            // Scroll to Explorer
+            document.getElementById('cari-template').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // ================= TOAST NOTIFICATION UTILITY =================
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            const toastMsg = document.getElementById('toast-message');
+            
+            toastMsg.textContent = message;
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            toast.classList.add('translate-y-0', 'opacity-100');
+
+            setTimeout(() => {
+                toast.classList.add('translate-y-20', 'opacity-0');
+                toast.classList.remove('translate-y-0', 'opacity-100');
+            }, 3500);
+        }
+    </script>
+</body>
+</html>
